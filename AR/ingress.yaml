@@ -1,0 +1,32 @@
+# k8s/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ar-ingress
+  namespace: audioreaper-astro
+  annotations:
+     kubernetes.io/ingress.class: "traefik"
+     traefik.ingress.kubernetes.io/router.tls.certresolver: "le-resolver"
+spec:
+  tls: 
+    - hosts:
+        - arc.aabuharrus.dev
+      secretName: cortado-production-tls
+  rules:
+    - host: arc.aabuharrus.dev
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: ar-astro-svc
+                port:
+                  number: 80
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ar-astro-svc
+                port:
+                  number: 80

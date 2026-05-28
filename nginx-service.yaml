@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service # how pods reach this service, needed for internal DNS
+  namespace: default
+spec:
+  type: NodePort
+  selector: # Tells the service which pods to direct traffic
+    app: nginx
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8000

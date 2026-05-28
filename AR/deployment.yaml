@@ -1,0 +1,21 @@
+# k8s/flask-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ar-astro
+  namespace: audioreaper-astro
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ar-astro
+  template:
+    metadata:
+      labels:
+        app: ar-astro
+    spec:
+      containers:
+        - name: ar-astro
+          image: abdoabuharrus/audioreaper-astro
+          ports:
+            - containerPort: 8080
