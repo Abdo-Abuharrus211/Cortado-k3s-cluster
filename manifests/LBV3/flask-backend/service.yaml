@@ -1,0 +1,12 @@
+# k8s/flask-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: lbv3-flask-svc
+  namespace: lbv3
+spec:
+  selector:
+    app: lbv3-flask
+  ports:
+    - port: 80
+      targetPort: 8000

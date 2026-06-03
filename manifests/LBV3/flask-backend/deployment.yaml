@@ -1,0 +1,21 @@
+# k8s/flask-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lbv3-flask
+  namespace: lbv3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lbv3-flask
+  template:
+    metadata:
+      labels:
+        app: lbv3-flask
+    spec:
+      containers:
+        - name: lbv3-flask-backend
+          image: abdoabuharrus/lbv3.0-flask:latest
+          ports:
+            - containerPort: 8000
