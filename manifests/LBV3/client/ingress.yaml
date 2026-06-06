@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: lbv3-ingress
+  namespace: lbv3
+  annotations:
+     kubernetes.io/ingress.class: "traefik"
+     traefik.ingress.kubernetes.io/router.tls.certresolver: "le-resolver"
+spec:
+  ingressClassName: "traefik"
+  tls:
+    - hosts:
+        - abdulovesdalia.com
+      secretName: cortado-production-tls
+  rules:
+    - host: abdulovesdalia.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: lbv3-client-svc
+                port:
+                  number: 80
