@@ -8,4 +8,4 @@ spec:
     app: lbv3-client
   ports:
     - port: 80
-      targetPort: 84
+      targetPort: 80

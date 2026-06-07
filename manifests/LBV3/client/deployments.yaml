@@ -11,13 +11,17 @@ spec:
   template:
     metadata:
       labels:
-        app: lbv3-client
+        app: lbv3-client 
     spec:
       containers:
         - name: lbv3-client
-          image: abdoabuharrus/lbv3.0:latest
+          image: abdoabuharrus/lbv3.0:sed1.0
           ports:
             - containerPort: 84
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/nginx/conf.d/default.conf
+              subPath: default.conf
           env:
             - name: VITE_SUPABASE_URL
               valueFrom:
@@ -32,9 +36,9 @@ spec:
             - name: VITE_BACKEND_BASE_URL
               valueFrom:
                 secretKeyRef:
-                   name: lbv3-flask-secret
-                   key: VITE_BACKEND_BASE_URL
-
-
-
-
+                  name: lbv3-flask-secret
+                  key: VITE_BACKEND_BASE_URL
+      volumes:
+        - name: config-volume
+          configMap:
+            name: nginx-client-config
