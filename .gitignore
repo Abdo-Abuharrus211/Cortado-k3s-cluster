@@ -1,6 +1,5 @@
-*/secrets/*-secrets.yaml
-*-secrets.yaml
+**/*secret*.yaml
+*secret*.yaml
 
-*/.env
-.env
-
+**/.env*
+.env*
